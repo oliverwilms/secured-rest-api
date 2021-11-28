@@ -6,9 +6,15 @@ XData setup
 <Manifest>
 	<Default Name="Namespace" Value="USER"/>
 	<Default Name="SourceDir" Value="/opt/irisapp/src/Oliver"/>
+	<Default Name="SYS" Value="%SYS"/>
+	<Default Name="SysDir" Value="/opt/irisapp/src/OAuth2"/>
 	<Namespace Name="${Namespace}" Create="no">
 		<Import File="${SourceDir}" Flags="ck" Recurse="1"/>
 	</Namespace>
+	<Namespace Name="${SYS}" Create="no">
+		<Import File="${SysDir}" Flags="ck" Recurse="1"/>
+	</Namespace>
+	<RunInstall Class="App.Installer" Method="CreateWebAppREST"/>
 </Manifest>
 }
 
