@@ -4,7 +4,7 @@ ARG IMAGE=intersystemsdc/iris-community
 ARG IMAGE=intersystemsdc/iris-community:2021.1.0.215.3-zpm
 ARG IMAGE=intersystems/irishealth:2020.1.0.215.0.20737
 FROM $IMAGE
-
+COPY hsts /tmp/
 USER root   
 RUN apt-get update 
 RUN apt-get install -y apache2 
