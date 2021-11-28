@@ -10,6 +10,7 @@ RUN apt-get update
 RUN apt-get install -y apache2 
 RUN apt-get install -y apache2-utils 
 RUN apt-get clean 
+RUN a2enmod ssl 
 
 WORKDIR /opt/irisapp
 RUN chown ${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_IRISGROUP} /opt/irisapp
