@@ -7,6 +7,7 @@ Parameter OAUTH2APPNAME = "Client";
 
 ClassMethod OnPage() As %Status
 {
+  do ##class(Oliver.Debug).DebugTEST("Web.OAUTH2.Cache1N > OnPage")
   &html<<html>
 <head>
   <style>
@@ -57,6 +58,7 @@ ClassMethod OnPage() As %Status
   
   // DK: use 'dankut' account to authenticate!
   set scope="openid profile scope1 scope2"
+  do ##class(Oliver.Debug).DebugTEST("Before GetAuthorizationCodeEndpoint: "_scope)
   set url=##class(%SYS.OAuth2.Authorization).GetAuthorizationCodeEndpoint(
     ..#OAUTH2APPNAME,
     scope,
@@ -64,6 +66,10 @@ ClassMethod OnPage() As %Status
     .properties,
     .isAuthorized,
     .sc)
+  do ##class(Oliver.Debug).DebugMerge("url",.url)
+  do ##class(Oliver.Debug).DebugMerge("properties",.properties)
+  do ##class(Oliver.Debug).DebugMerge("isAuthorized",.isAuthorized)
+  do ##class(Oliver.Debug).DebugStatus(sc)
   if $$$ISERR(sc) {
     write "GetAuthorizationCodeEndpoint Error="
     write ..EscapeHTML($system.Status.GetErrorText(sc))_"<br>",!
@@ -78,10 +84,21 @@ ClassMethod OnPage() As %Status
 ClassMethod OnPreHTTP() As %Boolean [ ServerOnly = 1 ]
 {
   #dim %response as %CSP.Response
+  do ##class(Oliver.Debug).DebugTEST("Web.OAUTH2.Cache1N > OnPreHTTP")
+  do ##class(Oliver.Debug).DebugMerge("accessToken",.accessToken)
+  do ##class(Oliver.Debug).DebugMerge("idtoken",.idtoken)
+  do ##class(Oliver.Debug).DebugMerge("responseProperties",.responseProperties)
+  do ##class(Oliver.Debug).DebugMerge("error",.error)
   set scope="openid profile scope1 scope2"
+  do ##class(Oliver.Debug).DebugMerge("scope",.scope)
   if ##class(%SYS.OAuth2.AccessToken).IsAuthorized(..#OAUTH2APPNAME,,scope,.accessToken,.idtoken,.responseProperties,.error) {
     set %response.ServerSideRedirect="Web.OAUTH2.Cache2N.cls"
   }
+  do ##class(Oliver.Debug).DebugTEST("After IsAuthorized: "_scope)
+  do ##class(Oliver.Debug).DebugMerge("accessToken",.accessToken)
+  do ##class(Oliver.Debug).DebugMerge("idtoken",.idtoken)
+  do ##class(Oliver.Debug).DebugMerge("responseProperties",.responseProperties)
+  do ##class(Oliver.Debug).DebugMerge("error",.error)
   quit 1
 }
 
