@@ -47,6 +47,7 @@ ClassMethod setup(ByRef pVars, pLogLevel As %Integer = 0, pInstaller As %Install
 
 ClassMethod CreateOauth2Server() As %Status
 {
+	Write "Begin CreateOauth2Server",!
 	set currentNS = $Namespace
     zn "%SYS"
     Set tSC = $$$OK
@@ -90,7 +91,7 @@ ClassMethod CreateOauth2Server() As %Status
 	Set sys.KeyAlgorithm = "RSA1_5"
 	Set sys.SSLConfiguration = "SSL"
 	Set tSC = sys.Save()
-
+	zw tSC
 	zn currentNS
 
     Quit tSC
@@ -98,6 +99,7 @@ ClassMethod CreateOauth2Server() As %Status
 
 ClassMethod CreateSSLConfig() As %Status
 {
+	Write "Begin CreateSSLConfig",!
 	set currentNS = $Namespace
     zn "%SYS"
     Set tSC = $$$OK
@@ -108,7 +110,7 @@ ClassMethod CreateSSLConfig() As %Status
     Set sys.Type = 0
     Set sys.Enabled = 1
 	Set tSC = sys.%Save()
-
+	zw tSC
 	zn currentNS
 
     Quit tSC
@@ -116,6 +118,7 @@ ClassMethod CreateSSLConfig() As %Status
 
 ClassMethod CreateServerDefinitionForClient()
 {
+	Write "Begin CreateServerDefinitionForClient",!
 	set currentNS = $Namespace
 	zn "%SYS"
 
@@ -127,12 +130,11 @@ ClassMethod CreateServerDefinitionForClient()
 	Set sys.IsDiscovery = 1
 
 	zw ##class(OAuth2.ServerDefinition).GetServerMetadata("https://localhost/oauth2","SSL",.metadata)
-	
-
-	Set sys.Metadata = metadata
-
+	Try {
+		Set sys.Metadata = metadata
+	} Catch { }
 	Set tSC = sys.%Save()
-		
+	zw tSC
 
 	zn currentNS
 
@@ -141,6 +143,7 @@ ClassMethod CreateServerDefinitionForClient()
 
 ClassMethod CreateClient()
 {
+	Write "Begin CreateClient",!
 	set currentNS = $Namespace
 	zn "%SYS"
 
@@ -158,7 +161,7 @@ ClassMethod CreateClient()
 	zw sys.RegisterClient()
 
 	Set tSC = sys.%Save()
-
+	zw tSC
     Set tSC = $$$OK
 	
 	zn currentNS
