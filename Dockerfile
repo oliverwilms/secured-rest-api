@@ -6,10 +6,13 @@ ARG IMAGE=intersystems/irishealth:2020.1.0.215.0.20737
 FROM $IMAGE
 ENV _HTTPD_DIR /etc/apache2
 USER root   
+
 # Install GateWay 
 RUN apt-get update 
-RUN apt-get install -y apache2 
-RUN apt-get install -y apache2-utils 
+
+RUN apt-get install -y apache2 debconf-utils sudo && a2enmod ssl && \
+/bin/echo -e $ISC_PACKAGE_MGRUSER\\tALL=\(ALL\)\\tNOPASSWD: ALL >> /etc/sudoers &&\
+sudo -u $ISC_PACKAGE_MGRUSER sudo echo enabled passwordless sudo-ing for $ISC_PACKAGE_MGRUSER
 
 # Generate self signed certificate
 RUN echo '* libraries/restart-without-asking boolean true' | debconf-set-selections && apt-get install -y openssl 
