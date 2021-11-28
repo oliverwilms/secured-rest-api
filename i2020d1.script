@@ -1,6 +1,12 @@
 zn "%SYS"
 do $SYSTEM.OBJ.Load("/opt/irisapp/Installer.cls", "ck")
 set sc = ##class(App.Installer).setup() 
+Set pVars("NAMESPACE")="MYCLIENT"
+Do ##class(OAuth2.Installer).setup(.pVars)
+Do ##class(OAuth2.Installer).CreateSSLConfig()
+Do ##class(OAuth2.Installer).CreateOauth2Server()
+Do ##class(OAuth2.Installer).CreateServerDefinitionForClient()
+Do ##class(OAuth2.Installer).CreateClient()
 do ##class(Security.Users).UnExpireUserPasswords("*")
 zn "USER"
 halt
