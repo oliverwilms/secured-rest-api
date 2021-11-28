@@ -1,0 +1,23 @@
+ServerName localhost
+LoadModule csp_module_sa /usr/irissys/csp/bin/CSPa24.so
+CSPModulePath /usr/irissys/csp/bin/
+<Location "/csp/bin/Systems/">
+         SetHandler cspsys-handler-sa
+</Location>
+<Location "/csp/bin/RunTime/">
+         SetHandler csp-handler-sa
+</Location>
+<Location /csp>
+         CSP On
+         SetHandler csp-handler-sa
+</Location>
+CSPFileTypes csp cls zen cxw 
+Alias /csp/ /usr/irissys/csp/
+<Directory "/usr/irissys/csp">
+         AllowOverride None
+         Options MultiViews FollowSymLinks ExecCGI
+         Require all granted
+         <FilesMatch "\.(log|ini|pid|exe)$">
+                  Require all denied
+         </FilesMatch>
+</Directory>
