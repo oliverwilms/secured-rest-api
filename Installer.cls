@@ -14,7 +14,7 @@ XData setup
 	<Namespace Name="${SYS}" Create="no">
 		<Import File="${SysDir}" Flags="ck" Recurse="1"/>
 	</Namespace>
-	<RunInstall Class="App.Installer" Method="CreateWebAppREST"/>
+	
 </Manifest>
 }
 
