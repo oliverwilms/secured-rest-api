@@ -39,7 +39,10 @@ XData Install [ XMLNamespace = INSTALLER ]
 </Manifest>
 }
 
-ClassMethod setup(ByRef pVars, pLogLevel As %Integer = 0, pInstaller As %Installer.Installer) As %Status [ CodeMode = objectgenerator, Internal ]
+ClassMethod setup(
+	ByRef pVars,
+	pLogLevel As %Integer = 0,
+	pInstaller As %Installer.Installer) As %Status [ CodeMode = objectgenerator, Internal ]
 {
 	
      Quit ##class(%Installer.Manifest).%Generate(%compiledclass, %code, "Install")
@@ -91,7 +94,7 @@ ClassMethod CreateOauth2Server() As %Status
 	Set sys.KeyAlgorithm = "RSA1_5"
 	Set sys.SSLConfiguration = "SSL"
 	Set tSC = sys.Save()
-	zw tSC
+	Write $system.Status.GetErrorText(tSC)
 	zn currentNS
 
     Quit tSC
@@ -110,13 +113,13 @@ ClassMethod CreateSSLConfig() As %Status
     Set sys.Type = 0
     Set sys.Enabled = 1
 	Set tSC = sys.%Save()
-	zw tSC
+	Write $system.Status.GetErrorText(tSC)
 	zn currentNS
 
     Quit tSC
 }
 
-ClassMethod CreateServerDefinitionForClient()
+ClassMethod CreateServerDefinitionForClient() As %Status
 {
 	Write "Begin CreateServerDefinitionForClient",!
 	set currentNS = $Namespace
@@ -129,12 +132,15 @@ ClassMethod CreateServerDefinitionForClient()
 	Set sys.SSLConfiguration = "SSL"
 	Set sys.IsDiscovery = 1
 
-	zw ##class(OAuth2.ServerDefinition).GetServerMetadata("https://localhost/oauth2","SSL",.metadata)
+	Set tSC = ##class(OAuth2.ServerDefinition).GetServerMetadata("https://localhost/oauth2","SSL",.metadata)
+	Write $system.Status.GetErrorText(tSC)
+	If $$$ISERR(tSC) Quit tSC
+
 	Try {
 		Set sys.Metadata = metadata
 	} Catch { }
 	Set tSC = sys.%Save()
-	zw tSC
+	Write $system.Status.GetErrorText(tSC)
 
 	zn currentNS
 
@@ -158,10 +164,12 @@ ClassMethod CreateClient()
 	Set sys.RedirectionEndpoint.Host = "localhost"
 	Set sys.AuthenticationType = "basic"
 	Set sys.Metadata."client_name" = "Client"
-	zw sys.RegisterClient()
+	Set tSC = sys.RegisterClient()
+	Write $system.Status.GetErrorText(tSC)
+	If $$$ISERR(tSC) Quit tSC
 
 	Set tSC = sys.%Save()
-	zw tSC
+	Write $system.Status.GetErrorText(tSC)
     Set tSC = $$$OK
 	
 	zn currentNS
