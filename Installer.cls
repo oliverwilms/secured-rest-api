@@ -4,6 +4,11 @@ Class App.Installer
 XData setup
 {
 <Manifest>
+	<Default Name="Namespace" Value="USER"/>
+	<Default Name="SourceDir" Value="/opt/irisapp/src/Oliver"/>
+	<Namespace Name="${Namespace}" Create="no">
+		<Import File="${SourceDir}" Flags="ck" Recurse="1"/>
+	</Namespace>
 </Manifest>
 }
 
