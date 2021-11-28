@@ -6,7 +6,11 @@ ARG IMAGE=intersystems/irishealth:2020.1.0.215.0.20737
 FROM $IMAGE
 
 USER root   
-        
+RUN apt-get update 
+RUN apt-get install -y apache2 
+RUN apt-get install -y apache2-utils 
+RUN apt-get clean 
+
 WORKDIR /opt/irisapp
 RUN chown ${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_IRISGROUP} /opt/irisapp
 USER ${ISC_PACKAGE_MGRUSER}
