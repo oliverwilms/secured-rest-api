@@ -13,8 +13,8 @@ USER ${ISC_PACKAGE_MGRUSER}
 
 COPY --chown=${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_IRISGROUP} src src
 COPY --chown=${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_IRISGROUP} module.xml .
-COPY --chown=${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_IRISGROUP} iris.script /tmp/
+COPY --chown=${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_IRISGROUP} i2020d1.script /tmp/iris.script
 
 RUN iris start IRIS \
-	&& iris session IRIS < /tmp/iris.script \
+    && iris session IRIS < /tmp/iris.script \
     && iris stop IRIS quietly
