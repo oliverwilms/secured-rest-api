@@ -4,11 +4,15 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
+    hostname: iris
+    command: -b "sudo service apache2 start"
     restart: always
     ports: 
       - 19800:51773
       - 57700:52773
       - 53773
+      - 80:80
+      - 443:443
     volumes:
       - ./:/irisdev/app
       - ~/iris.key:/usr/irissys/mgr/iris.key
