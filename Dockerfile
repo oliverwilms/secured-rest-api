@@ -19,6 +19,8 @@ RUN echo '* libraries/restart-without-asking boolean true' | debconf-set-selecti
 RUN mkdir $_HTTPD_DIR/ssl && openssl req -x509 -nodes -days 1 -newkey rsa:2048 -subj /CN=* -keyout $_HTTPD_DIR/ssl/server.key -out $_HTTPD_DIR/ssl/server.crt
 
 RUN apt-get clean 
+COPY ./hsts/ /tmp
+RUN cat /tmp/csp-webgateway >> /etc/apache2/apache2.conf
 
 #Enable CSPGateway
 COPY ./cspgateway/ /opt/cspgateway/bin
