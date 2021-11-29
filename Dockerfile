@@ -22,6 +22,7 @@ RUN apt-get clean
 
 #Enable CSPGateway
 COPY ./cspgateway/ /opt/cspgateway/bin
+RUN chmod 644 /opt/cspgateway/bin/CSP.ini
 RUN cp /usr/irissys/csp/bin/CSPa24.so /opt/cspgateway/bin
 RUN cp /usr/irissys/csp/bin/CSPa24Sys.so /opt/cspgateway/bin
 RUN cp /usr/irissys/csp/bin/libz.so /opt/cspgateway/bin
