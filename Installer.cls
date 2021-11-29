@@ -8,11 +8,13 @@ XData setup
 	<Default Name="SourceDir" Value="/opt/irisapp/src/Oliver"/>
 	<Default Name="SYS" Value="%SYS"/>
 	<Default Name="SysDir" Value="/opt/irisapp/src/OAuth2"/>
+	<Default Name="ZAUTH" Value="/opt/irisapp/src/Web/OAUTH2/ZAUTHENTICATE.mac"/>
 	<Namespace Name="${Namespace}" Create="no">
 		<Import File="${SourceDir}" Flags="ck" Recurse="1"/>
 	</Namespace>
 	<Namespace Name="${SYS}" Create="no">
 		<Import File="${SysDir}" Flags="ck" Recurse="1"/>
+		<Import File="${ZAUTH}" Flags="ck" IgnoreErrors="0"/>
 	</Namespace>
 	
 </Manifest>
