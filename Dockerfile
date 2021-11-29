@@ -27,9 +27,6 @@ RUN cp /usr/irissys/csp/bin/CSPa24.so /opt/cspgateway/bin
 RUN cp /usr/irissys/csp/bin/CSPa24Sys.so /opt/cspgateway/bin
 RUN cp /usr/irissys/csp/bin/libz.so /opt/cspgateway/bin
 
-COPY ./hsts/oliver-ssl.conf /etc/apache2/sites-available
-RUN a2enmod ssl && a2enmod headers && a2ensite oliver-ssl
-
 COPY httpd-csp.conf $_HTTPD_DIR/sites-available
 RUN chmod 644 $_HTTPD_DIR/sites-available/httpd-csp.conf
 RUN a2ensite httpd-csp && update-rc.d apache2 enable
