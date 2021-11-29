@@ -30,7 +30,7 @@ RUN cp /usr/irissys/csp/bin/libz.so /opt/cspgateway/bin
 RUN a2enmod ssl 
 
 COPY httpd-csp.conf $_HTTPD_DIR/sites-available
-
+RUN chmod 644 $_HTTPD_DIR/sites-available/httpd-csp.conf
 RUN a2ensite httpd-csp && update-rc.d apache2 enable
 
 WORKDIR /opt/irisapp
