@@ -20,7 +20,7 @@ NameSpace=$3
 # Installer source (Installer.*.cls)
 ClassImportDir=$DIR/src/OAuth2
 # Source dir install by source installer
-DirSrc=$DIR/src
+DirSrc=$DIR/src/Web
 
 
 
