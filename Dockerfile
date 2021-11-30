@@ -45,4 +45,5 @@ COPY --chown=${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_IRISGROUP} i2020d1.script /tmp
 # First start the instance quietly
 RUN sudo service apache2 start && iris start $ISC_PACKAGE_INSTANCENAME quietly \
     && iris session IRIS < /tmp/iris.script \
+    && sh install.sh $ISC_PACKAGE_INSTANCENAME sys MYCLIENT  \
     && iris stop $ISC_PACKAGE_INSTANCENAME quietly && sudo service apache2 stop
