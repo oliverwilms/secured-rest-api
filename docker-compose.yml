@@ -9,8 +9,6 @@ services:
     restart: always
     ports: 
       - 52773
-      - 1972
-      - 53773
       - 57700:80
       - 443:443
     volumes:
