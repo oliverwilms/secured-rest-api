@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
-  <Document name="dc-sample-rest.ZPM">
+  <Document name="secured-rest-api.ZPM">
     <Module>
       <Dependencies>
         <ModuleReference>
@@ -9,8 +9,8 @@
         </ModuleReference>
       </Dependencies>
       <Description>And example of a secured REST API deployment with Roles, Users and Access management</Description>
-      <Name>dc-sample-rest</Name>
-      <Version>1.0.1</Version>
+      <Name>secured-rest-api</Name>
+      <Version>0.0.1</Version>
       <Packaging>module</Packaging>
       <SourcesRoot>src</SourcesRoot>
       <Resource Name="dc.sample.rest.PKG"/>
