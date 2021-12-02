@@ -1,23 +1,23 @@
-## dc-sample-rest-api
-This is a template of a REST API application built with ObjectScript in InterSystems IRIS.
-It contains the example of unauthenticated and authenticated access to the persistent data via REST API.
-It demoes the creation of users, roles and how to grant the access.
+## secured-rest-api
+This is my entry for InterSystems Security Contest. My plan was to implement Oauth authentication / authorization. I read some articles and learned Oauth requires HTTPS which requires a webserver.
+
+I had previously added Apache 2 webserver to IRIS container. So I began by cloning github.com:intersystems-community/secured-rest-api and adding some stuff...
+ 
+The template contains an example of unauthenticated and authenticated access to the persistent data via REST API. It demoes the creation of users, roles and how to grant the access.
 
 ## Prerequisites
 Make sure you have [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and [Docker desktop](https://www.docker.com/products/docker-desktop) installed.
 
 ## Installation with ZPM
 
-zpm:USER>install dc-sample-rest
+zpm:USER>install $$NotInZPM
 
 ## Installation for development with Docker
 
-Create your repository from template.
-
-Clone/git pull the repo into any local directory e.g. like it is shown below (here I show all the examples related to this repository, but I assume you have your own derived from the template):
+Clone/git pull the repo into any local directory e.g. like it is shown below:
 
 ```
-$ git clone git@github.com:intersystems-community/secured-rest-api.git
+$ git clone git@github.com:oliverwilms/secured-rest-api.git
 ```
 
 Open the terminal in this directory and run:
@@ -68,7 +68,9 @@ If you change the user to Bill you'll get 403 response.
 ## Next Steps
 
 Next steps for these demo could be the representation of API map in Open API (swagger) standard and implementation if a Bearer Authentication
+
+I added Apache 2 webserver but it is not working properly.
 ## Collaboration  
 
-Pull requests are very wellcome!
+Pull requests are very welcome!
 
