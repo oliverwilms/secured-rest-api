@@ -52,12 +52,17 @@ We see them because /crudall doesn't demand authentication according to [this li
 
 and thus the /crudall registers sign in of a UnknownUser which has a role Reader [assigned in Security class](https://github.com/evshvarov/secured-rest-api/blob/master/src/dc/sample/rest/Security.cls#L48).
 
-## Testing Secure access
+## Testing Secure access (Beginning)
 
-Secured access in this demo expressed via [deploying](https://github.com/evshvarov/secured-rest-api/blob/master/src/dc/sample/rest/Security.cls#L8) of two users Bill and John and Reader and Writer roles for the data access regulation.
+Secured access in this template expressed via [deploying](https://github.com/evshvarov/secured-rest-api/blob/master/src/dc/sample/rest/Security.cls#L8) of two users Bill and John and Reader and Writer roles for the data access regulation.
 The regulation is implemented via role checking in the REST-API implementation calls: e.g. here for [GET](https://github.com/evshvarov/secured-rest-api/blob/master/src/dc/sample/rest/PersonREST.cls#L42) and [PUT](https://github.com/evshvarov/secured-rest-api/blob/master/src/dc/sample/rest/PersonREST.cls#115) calls.
 
-Open http://localhost:52773/crud/persons/all. You'll be prompted for the basic authenticatoin. Sign in with user Bill with ChangeMe password, that has Reader role. And you'll see the data as the Reader role is assigned to user Bill.
+Open http://localhost:52773/crud/persons/all. You'll be prompted for the basic authentication. Sign in with user Bill with ChangeMe password, that has Reader role. And you'll see the data as the Reader role is assigned to user Bill.
+
+## Your connection to this site is not private
+
+When my browser prompts for Username and Password to sign in, the form displays that your connection is not private.
+
 Check also in another window or via request in Postman that if you sign in with user John you'll get 403 error back (Unauthorised access) as user John doesn't have role Reader.
 
 PUT and POST requests can be tested on a http://localhost:52773/crud/persons/ call which we can test e.g. via Postman. The [postman collection](https://github.com/evshvarov/secured-rest-api/blob/master/secured%20rest-api.postman_collection.json) with calls can be found in the repo.
@@ -73,4 +78,3 @@ I added Apache 2 webserver but it is not working properly.
 ## Collaboration  
 
 Pull requests are very welcome!
-
