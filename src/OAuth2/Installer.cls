@@ -134,14 +134,14 @@ ClassMethod CreateServerDefinitionForClient() As %Status
 
 	Set tSC = ##class(OAuth2.ServerDefinition).GetServerMetadata("https://localhost/oauth2","SSL",.metadata)
 	Write $system.Status.GetErrorText(tSC)
-	If $$$ISERR(tSC) Quit tSC
 
-	Try {
-		Set sys.Metadata = metadata
-	} Catch { }
-	Set tSC = sys.%Save()
-	Write $system.Status.GetErrorText(tSC)
-
+	If $$$ISOK(tSC) {
+		Try {
+			Set sys.Metadata = metadata
+		} Catch { }
+		Set tSC = sys.%Save()
+		Write $system.Status.GetErrorText(tSC)
+	}
 	zn currentNS
 
     Quit tSC
@@ -166,12 +166,12 @@ ClassMethod CreateClient()
 	Set sys.Metadata."client_name" = "Client"
 	Set tSC = sys.RegisterClient()
 	Write $system.Status.GetErrorText(tSC)
-	If $$$ISERR(tSC) Quit tSC
 
-	Set tSC = sys.%Save()
-	Write $system.Status.GetErrorText(tSC)
-    Set tSC = $$$OK
-	
+	If $$$ISOK(tSC) {
+		Set tSC = sys.%Save()
+		Write $system.Status.GetErrorText(tSC)
+    	Set tSC = $$$OK
+	}
 	zn currentNS
 
     Quit tSC
